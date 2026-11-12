@@ -1,14 +1,11 @@
 class Solution:
     def rob(self, nums: list[int]) -> int:
+        prev1, prev2 = 0, 0
+
+        for n in nums:
+            cur = max(prev1 + n, prev2)
+            prev1 = prev2
+            prev2 = cur
+
+        return cur
         
-        @cache
-        def dfs(i, cur):
-            if i >= len(nums):
-                return 0
-
-            take = nums[i] + dfs(i + 2, cur)
-            leave = dfs(i + 1, cur)
-
-            return max(take, leave)
-
-        return dfs(0, 0)

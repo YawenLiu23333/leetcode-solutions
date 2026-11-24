@@ -7,10 +7,7 @@ class Solution {
                 char c = s.charAt(i);
                 map.put(c, map.getOrDefault(c, 0) + 1);
             }
-            if(!res.containsKey(map)){
-                res.put(map, new ArrayList<>());
-            }
-            res.get(map).add(s);
+            res.computeIfAbsent(map, k -> new ArrayList<>()).add(s);
         }
         List<List<String>> output = new ArrayList<>(res.values());
         return output;

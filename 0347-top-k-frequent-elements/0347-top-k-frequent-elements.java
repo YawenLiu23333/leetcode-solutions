@@ -14,15 +14,13 @@ class Solution {
         for(Map.Entry<Integer, Integer> entry: map.entrySet()){
             int num = entry.getKey();
             int freq = entry.getValue();
-            pq.offer(new int[] {-freq, num});
-        }
+                pq.offer(new int[] {freq, num});
+                while(pq.size() > k){
+                    pq.poll();
+                }
+            }
 
-        int[] res = new int[k];
-        for(int i =0; i < k; i ++){
-            int[] pair = pq.poll();
-            res[i] = pair[1];
-        }
-        return res;
+        return pq.stream().mapToInt(pair -> pair[1]).toArray();
         
     }
 }
